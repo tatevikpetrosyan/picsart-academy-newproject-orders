@@ -1,28 +1,28 @@
 package org.example.models;
 
 public class Order {
-    protected String customerName;
+    protected Customer customer;
     protected double price;
 
-    public Order (String customerName) {
-        this.customerName = customerName;
+    public Order (Customer customer) {
+        this.customer = customer;
         this.price = 0;
 
     }
-    public Order (String customerName, double price) {
-        this.customerName = customerName;
+    public Order (Customer customer, double price) {
+        this.customer = customer;
         this.price = price;
     }
     public void printSummary() {
-        System.out.println("Customer: " + customerName + " Price: AMD" + price);
+        System.out.println("Customer: " + customer + " Price: AMD" + price);
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public double getPrice() {
