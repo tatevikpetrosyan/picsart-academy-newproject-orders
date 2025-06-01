@@ -1,20 +1,21 @@
 package org.example.models;
 
-public class Order {
+public abstract class Order {
     protected Customer customer;
     protected double price;
 
     public Order (Customer customer) {
         this.customer = customer;
         this.price = 0;
-
     }
+
     public Order (Customer customer, double price) {
         this.customer = customer;
         this.price = price;
     }
+
     public void printSummary() {
-        System.out.println("Customer: " + customer + " Price: AMD" + price);
+        System.out.println("Order Price: AMD" + price);
     }
 
     public Customer getCustomer() {

@@ -1,54 +1,64 @@
 package org.example;
 
-import org.example.models.Customer;
-import org.example.models.ExpressOrder;
-import org.example.models.InternationalOrder;
-import org.example.models.Order;
+import org.example.models.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        //creating 2 customers
-        Customer customer1 = new Customer();
-        customer1.setName("Tatev");
-        customer1.setMobile("095-54477");
-        customer1.setAddress("Yerevan, Azatutyan 24");
-        System.out.println("Customer is successfully created " + customer1.getName());
-        System.out.println();
+        //creating addresses
+        Address address1 = new Address("5", "Azatutyun", "Yerevan", "Armenia");
+        Address address2 = new Address("24/4", "Azatutyun", "Yerevan", "Armenia");
 
-        Customer customer2 = new Customer();
-        customer2.setName("Anna");
-        customer2.setAddress("Yerevan, Aharonyan 8");
-        customer2.setMobile("094-55587");
-        System.out.println("Customer is successfully created " + customer1.getName());
-        System.out.println();
+        //creating 2 customers
+        Customer customer1 = new Customer("John", "Smith", "john@gmail.com", "+37488888888", address1);
+
+        Customer customer2 = new Customer("Tatev", "Petrosyan", "tatev@gmail.com", "+3749999999", address2);
 
         //creating several orders for customers
         System.out.println("---------------");
-        ExpressOrder order1 = new ExpressOrder(customer1,15000);
+
+        Order order1 = new ExpressOrder(customer1,15000);
+        customer1.printSummary();
+        // order1.getCustomer().printSummary();
         order1.printSummary();
 
-        InternationalOrder order2 = new InternationalOrder(customer2, 30000);
+        System.out.println("---------------");
+        Order order2 = new InternationalOrder(customer2, 30000);
+        customer2.printSummary();
         order2.printSummary();
 
-        ExpressOrder order3 = new ExpressOrder(customer2, 45000);
+        Order order3 = new ExpressOrder(customer2, 45000);
+
+        Order order4 = new PickupOrder(customer1, 19500);
 
         System.out.println();
         //Grel foreach loop u mi toxov tpel bolor orderneri summarynery
 
-        Order[] orders = {order1, order2, order3};
-        for ( Order order : orders) {
+        System.out.println(ExpressOrder.getVendor());
+
+        Order[] orders = {order1, order2, order3, order4};
+        for (Order order : orders) {
             order.printSummary();
+            order.getCustomer().printSummary();
+            System.out.println("-----------------------");
         }
 
+        System.out.println("-----------------");
         //Stugel express ordernery ev tpel
-        int count = 0;
-        for ( Order order : orders ) {
+        int totalOrders = orders.length;
+        int expressOrderCount = 0;
+        int internationalOrderCount = 0;
+        for (Order order : orders ) {
             if (order instanceof ExpressOrder) {
-                count++;
+                expressOrderCount++;
+
+            } else if (order instanceof InternationalOrder) {
+                internationalOrderCount++;
             }
+        }
+        System.out.println("Total orders: " + totalOrders);
+        System.out.println("We have " + expressOrderCount + " express orders");
+        System.out.println("We have " + internationalOrderCount + " international orders");
 
         }
-        System.out.println("We have " + count + " express orders");
     }
-}
