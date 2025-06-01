@@ -2,8 +2,8 @@ package org.example.models;
 
 public class PickupOrder extends Order{
 
-    public PickupOrder(Customer customer, double price) {
-        super(customer, price);
+    public PickupOrder(int id, Customer customer, double price) {
+        super(id, customer, price);
     }
 
     public void printSummary() {

@@ -1,9 +1,11 @@
 package org.example.models;
 
+import org.example.exceptions.CountryDeliverException;
+
 public class ExpressOrder extends Order implements Deliverable {
     private static String vendor = "DHL";
-    public ExpressOrder(Customer customer, double price) {
-        super(customer, price);
+    public ExpressOrder(int id, Customer customer, double price) {
+        super(id, customer, price);
     }
 
     @Override
