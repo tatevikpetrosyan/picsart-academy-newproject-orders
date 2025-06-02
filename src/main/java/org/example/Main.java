@@ -94,5 +94,12 @@ public class Main {
         System.out.println("We have " + expressOrderCount + " express orders");
         System.out.println("We have " + internationalOrderCount + " international orders");
 
+        System.out.println();
+        //Discounts
+        for (Order order : orders) {
+            if (order.getCustomer().getAddress().getCountry().equals("Armenia")) {
+                System.out.println(order.getId() + " You have 50% discount");
+            }
+        }
     }
 }
