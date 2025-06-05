@@ -4,13 +4,19 @@ import org.example.exceptions.CountryDeliverException;
 import org.example.exceptions.PaymentException;
 import org.example.models.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
 
         //creating addresses
-        Address address1 = new Address("5", "Azatutyun", "Yerevan", "Armenia");
+        Address address1 = new Address("5", "Azatutyun", "Dilijan", "Armenia");
         Address address2 = new Address("24/4", "Azatutyun", "Yerevan", "Armenia");
         Address address3 = new Address("2", "Rustaveli Avenue", "Tbilisi", "Georgia");
+        Address address4 = new Address("8", "Isahakyan", "Gyumri", "Armenia");
 
         //creating several customers
         Customer customer1 = new Customer("John", "Smith", "john@gmail.com", "+37488888888", address1);
@@ -38,6 +44,22 @@ public class Main {
 
         //Array full orders
         Order[] orders = {order1, order2, order3, order4, order5, order6};
+
+        ArrayList<Order> ordersList = new ArrayList<>();
+        ordersList.add(order1);
+        ordersList.add(order2);
+        ordersList.add(order3);
+        ordersList.add(order4);
+        ordersList.add(order5);
+        ordersList.add(order6);
+        System.out.println();
+        System.out.println("Printing orders list");
+        System.out.println("Before sorting");
+        System.out.println(ordersList);
+        System.out.println("After sorting");
+        Collections.sort(ordersList);
+        System.out.println(ordersList);
+
 
         System.out.println();
         System.out.println("-----------------");
@@ -101,5 +123,29 @@ public class Main {
                 System.out.println(order.getId() + " You have 50% discount");
             }
         }
+        //Customer Sortings
+        System.out.println("-----------------");
+        ArrayList<Customer> customerList = new ArrayList<>(
+                Arrays.asList(customer1,customer3,customer2));
+        Collections.sort(customerList, new CustomerComparatorUsingFirstName());
+        System.out.println(customerList);
+
+        System.out.println("-------------------");
+        Collections.sort(customerList, new CustomerComparatorUsingLastName());
+        System.out.println(customerList);
+
+        //Address Sortings
+        System.out.println();
+        System.out.println("-------------------------");
+        ArrayList<Address> addressList = new ArrayList<>(
+                Arrays.asList(address3,address1,address2, address4));
+        Collections.sort(addressList, new AddressComparatorUsingCity());
+        System.out.println(addressList);
+        Collections.sort(addressList, new AddressComparatorUsingCity().reversed());
+        System.out.println(addressList);
+
+        System.out.println();
+        Collections.sort(addressList, new AddressComparatorUsingCountry());
+        System.out.println(addressList);
     }
 }

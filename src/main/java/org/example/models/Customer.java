@@ -62,4 +62,9 @@ public class Customer {
     public void printSummary() {
         System.out.println("Customer: " + " " + firstName +" " + lastName +", " + email +", " + phone +", " + address);
     }
+
+    @Override
+    public String toString(){
+        return firstName +" " + lastName +", " + email +", " + phone +", " + address;
+    }
 }
