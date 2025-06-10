@@ -22,7 +22,7 @@ public class Homework {
         Student student2 = new Student("Tatev", 90);
         Student student4 = new Student("Aren", 70);
         Student student5 = new Student("Hayk", 55);
-        Student student6 = new Student("Mari", 58);
+        Student student6 = new Student("Karen", 58);
 
         ArrayList<Student> students = new ArrayList<>();
         students.add(student1);
@@ -65,9 +65,27 @@ public class Homework {
             }
         }
         //Խնդիր 6. Լիստից հեռացնել բոլոր ուսանողներին, ովքեր ստացել են 60-ից ցածր գնահատական
+        ArrayList<Student> students1 = new ArrayList<>();
+        students1.add(student1);
+        students1.add(student2);
+        students1.add(student3);
+        students1.add(student4);
+        students1.add(student5);
+        students1.add(student6);
         System.out.println();
         System.out.println("_________________");
-        students.removeIf(student -> student.score<60);
-        System.out.println(students);
+        students1.removeIf(student -> student.score<60);
+        System.out.println(students1);
+
+
+        //Խնդիր 7. Վերադարձնել այն հաճախորդների ցուցակը, որոնց անունը սկսվում է “K”-ով
+        System.out.println();
+        System.out.println("_________________");
+        ArrayList<String> customerNames = new ArrayList<>(Arrays.asList("David", "Ani", "Karen", "Kathrine", "Mari"));
+        for ( String customerName : customerNames) {
+            if (customerName.charAt(0) == 'K') {
+                System.out.println(customerName);
+            }
+        }
     }
 }
