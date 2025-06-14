@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Task2map {
 
     public static Map<String, String> contactMap = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Phone Book Task
         //	•	Create a HashMap<String, String> to store names and phone numbers.
         //	•	Implement functions to:
@@ -23,14 +24,25 @@ public class Task2map {
 
         String filename = "data.txt";
         try {
-            FileWriter writer = new FileWriter(filename);
+            FileReader reader = new FileReader(filename);
+            BufferedReader buffReader = new BufferedReader(reader);
+            String line;
+            while ((line = buffReader.readLine()) != null) {
+                String[] newData = line.split("\\s*\\|\\s*");
+                if (newData.length == 2) {
+                    contactMap.put(newData[0], newData[1]);
+                }
+                System.out.println("Read: " + line);
+            }
+            buffReader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading from file.");
+        }
 
             boolean isAlive = true;
-
             Scanner scanner = new Scanner(System.in);
 
             while (isAlive) {
-
                 System.out.println("Type 1 for adding contact");
                 System.out.println("Type 2 for delete contact");
                 System.out.println("Type 3 for searching contact");
@@ -43,19 +55,16 @@ public class Task2map {
                         System.out.println("Type number");
                         String number = scanner.next();
                         addContact(name, number);
-                        writer.write(name + "\n" + number);
                         break;
                     case "2":
                         System.out.println("Type name for delete");
                         String name1 = scanner.next();
                         deleteContact(name1);
-                        writer.write(name1);
                         break;
                     case "3":
                         System.out.println("Type name for searching");
                         String name2 = scanner.next();
                         searchContact(name2);
-                        writer.write(name2);
 
                         break;
                     default:
@@ -65,26 +74,16 @@ public class Task2map {
                 }
             }
 
-            writer.close();
+        try (FileWriter writer = new FileWriter(filename)) {
+            Set<Map.Entry<String, String>> set = contactMap.entrySet();
+            for (Map.Entry<String, String> a : set) {
+                String contactMapForFile = a.getKey() + " | " + a.getValue();
+                writer.write(contactMapForFile + "\n");
+            }
             System.out.println("Data saved to the file");
         } catch (IOException e) {
             System.out.println("Error writing to file.");
-            e.printStackTrace();
         }
-
-        try {
-            FileReader reader = new FileReader(filename);
-            BufferedReader buffReader = new BufferedReader(reader);
-            String line;
-            while ((line = buffReader.readLine()) != null) {
-                System.out.println("Read: " + line);
-            }
-            buffReader.close();
-        } catch (IOException e) {
-            System.out.println("Error reading from file.");
-            e.printStackTrace();
-        }
-
     }
 
     public static void addContact(String name, String phoneNumber) {
@@ -96,7 +95,6 @@ public class Task2map {
     }
     public static void searchContact(String name) {
         System.out.println(contactMap.get(name));
-
     }
 
 }
