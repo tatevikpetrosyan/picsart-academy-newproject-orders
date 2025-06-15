@@ -1,6 +1,6 @@
 package org.example.enumHomework;
 
-public enum Season {
+public enum     Season {
     WINTER("7"),
     SPRING("15"),
     SUMMER("28"),

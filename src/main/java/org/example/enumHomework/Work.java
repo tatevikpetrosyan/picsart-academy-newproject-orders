@@ -2,6 +2,7 @@ package org.example.enumHomework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Work {
     public static void main(String[] args) {
@@ -9,15 +10,20 @@ public class Work {
         // Define a Simple Enum
         // Create an enum DayOfWeek with constants for each day (MONDAY to SUNDAY).
         //	•	Task: Print a message based on the current day.
-        DayOfWeek currentDay = DayOfWeek.FRIDAY;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a day of the week (e.g., MONDAY): ");
+        String input = scanner.nextLine().trim().toUpperCase();
+
+        DayOfWeek currentDay = DayOfWeek.valueOf(input);
         System.out.println("Today is " + currentDay);
 
         System.out.println("_______________________");
         //Task 2.	Enum with Switch Case
         //Use the DayOfWeek enum in a switch statement to print whether the day is a weekday or weekend.
-
-        weekDays(DayOfWeek.MONDAY);
-        weekDays2(DayOfWeek.SATURDAY);
+        System.out.print("Enter a day of the week (e.g., MONDAY): ");
+        String input1 = scanner.nextLine().trim().toUpperCase();
+        weekDays(DayOfWeek.valueOf(input1));
+        weekDays2(DayOfWeek.valueOf(input1));
 
         System.out.println("_______________________");
         //Task 3. Enum with Methods
@@ -50,25 +56,10 @@ public class Work {
     //version 2
     static void weekDays2 (DayOfWeek dayofWeek){
         switch (dayofWeek) {
-            case MONDAY:
+            case MONDAY, FRIDAY, TUESDAY, WEDNESDAY, THURSDAY:
                 System.out.println("Day is weekday");
                 break;
-            case TUESDAY:
-                System.out.println("Day is weekday");
-                break;
-            case WEDNESDAY:
-                System.out.println("Day is weekday");
-                break;
-            case THURSDAY:
-                System.out.println("Day is weekday");
-                break;
-            case FRIDAY:
-                System.out.println("Day is weekday");
-                break;
-            case SATURDAY:
-                System.out.println("Day is weekend");
-                break;
-            case SUNDAY:
+            case SATURDAY, SUNDAY:
                 System.out.println("Day is weekend");
                 break;
         }
