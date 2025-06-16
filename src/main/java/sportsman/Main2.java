@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main2 {
     public static void main(String[] args) {
 
-        String str1 = "alone";
-        String str2 = "with my team";
+        String str1 = " alone";
+        String str2 = " with my team";
 
         String a = SportCategory.SINGLE.toString();
         String b = SportCategory.TEAM.toString();
