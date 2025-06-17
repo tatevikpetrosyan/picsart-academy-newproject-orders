@@ -14,6 +14,8 @@ public class Task2map {
 
     public static Map<String, String> contactMap = new HashMap<>();
 
+    static String filename = "data1.txt";
+
     public static void main(String[] args) {
         // Phone Book Task
         //	•	Create a HashMap<String, String> to store names and phone numbers.
@@ -22,22 +24,7 @@ public class Task2map {
         //	•	Delete a contact
         //	•	Search by name
 
-        String filename = "data.txt";
-        try {
-            FileReader reader = new FileReader(filename);
-            BufferedReader buffReader = new BufferedReader(reader);
-            String line;
-            while ((line = buffReader.readLine()) != null) {
-                String[] newData = line.split("\\s*\\|\\s*");
-                if (newData.length == 2) {
-                    contactMap.put(newData[0], newData[1]);
-                }
-                System.out.println("Read: " + line);
-            }
-            buffReader.close();
-        } catch (IOException e) {
-            System.out.println("Error reading from file.");
-        }
+        readFile();
 
             boolean isAlive = true;
             Scanner scanner = new Scanner(System.in);
@@ -73,7 +60,14 @@ public class Task2map {
                         break;
                 }
             }
+        }
 
+    public static void addContact(String name, String phoneNumber) {
+        contactMap.put(name, phoneNumber);
+        writeTofile();
+    }
+
+    public static void writeTofile() {
         try (FileWriter writer = new FileWriter(filename)) {
             Set<Map.Entry<String, String>> set = contactMap.entrySet();
             for (Map.Entry<String, String> a : set) {
@@ -86,9 +80,23 @@ public class Task2map {
         }
     }
 
-    public static void addContact(String name, String phoneNumber) {
-        contactMap.put(name, phoneNumber);
+        public static void readFile() {
+        try {
+            FileReader reader = new FileReader(filename);
+            BufferedReader buffReader = new BufferedReader(reader);
+            String line;
+            while ((line = buffReader.readLine()) != null) {
+                String[] newData = line.split("\\s*\\|\\s*");
+                contactMap.put(newData[0], newData[1]);
+
+                System.out.println("Read: " + line);
+            }
+            buffReader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading from file.");
+        }
     }
+
     public static void deleteContact(String name) {
         contactMap.remove(name);
 

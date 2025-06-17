@@ -1,6 +1,6 @@
 new | 000
 boom | 88
 barev | 333
-tatev | 5555
-ani | 777
+tatev | 2
+ani | 4444
 hey | 1111
