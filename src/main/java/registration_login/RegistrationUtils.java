@@ -1,8 +1,8 @@
 package registration_login;
 
-public class Registration {
+public class RegistrationUtils {
 
-    public static boolean register(User user) {
+    public static boolean isUserValid(User user) {
 
         boolean isValid = true;
             if (user.getUsername().length() <= 10) {
