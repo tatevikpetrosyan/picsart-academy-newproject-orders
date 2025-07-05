@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Login {
 
-    public static void login(ArrayList<User> usersStorage) {
+    public static User login(ArrayList<User> usersStorage) {
         Scanner scanner = new Scanner(System.in);
 
         int attempts = 3;
@@ -18,24 +18,19 @@ public class Login {
             System.out.println("Please type your password");
             String password = scanner.nextLine();
 
-            boolean loginSuccess = false;
             for (User user : usersStorage) {
                 if (user.getUsername().equals(username)) {
-                    if(user.getPassword().equals(password)) {
-                        loginSuccess = true;
-                        break;
+                    if (user.getPassword().equals(password)) {
+                        System.out.println("Dear " + username + " you are successfully logged in");
+                        System.out.println("Good working day!!!");
+                        return user;
                     }
                 }
             }
-            if (loginSuccess) {
-                System.out.println("Dear " + username + " you are successfully logged in");
-                System.out.println("Good working day!!!");
-                return;
-            } else {
-                System.out.println("Invalid username or password");
-            }
+            System.out.println("Invalid username or password");
             attempts = attempts - 1;
         }
         System.out.println("You do not have any attempt to login");
+        return null;
     }
 }

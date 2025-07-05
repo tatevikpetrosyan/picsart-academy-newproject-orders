@@ -2,12 +2,12 @@ package registration_login;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main1 {
 
     public static ArrayList<User> usersStorage = new ArrayList<>();
-   // public static HashMap<String, User> usersMap = new HashMap<>();
 
     public static void main(String[] args) {
         menu();
@@ -41,15 +41,23 @@ public class Main1 {
 
                     if (RegistrationUtils.isUserValid(user)) {
                         usersStorage.add(user);
-                        //usersMap.put(username, user);
                     }
                 }
                 break;
                 case 2: {
                     System.out.println("Going to login page");
                     System.out.println();
-                    Login.login(usersStorage);
-                    isActive = false;
+                    User user = Login.login(usersStorage);
+                    ArrayList<String> userNotes = new ArrayList<>();
+                    if(user == null) {
+                        System.out.println("Login failed");
+                    } else if (user != null ){
+                        NotesFunction.readNotes(user, userNotes);
+                        System.out.println("Writing new notes...");
+                        String newNotes = scanner.nextLine();
+                        userNotes.add(newNotes);
+                        NotesFunction.writeNotes(user, userNotes);
+                    }
                 }
                 break;
                 case 3: {

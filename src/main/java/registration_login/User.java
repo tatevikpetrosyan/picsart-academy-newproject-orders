@@ -1,10 +1,13 @@
 package registration_login;
 
+import java.util.List;
+
 public class User {
     private String fullName;
     private String username;
     private String email;
     private String password;
+    private List<String> userNotes;
 
     public User(String fullName, String username, String email, String password) {
         this.fullName = fullName;
@@ -39,6 +42,14 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<String> getUserNotes() {
+        return userNotes;
+    }
+
+    public void setUserNotes(List<String> userNotes) {
+        this.userNotes = userNotes;
     }
 
     @Override
